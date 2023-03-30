@@ -1,0 +1,17 @@
+{
+    "name": "loginner/fakat-repo",
+    "description": "Course project",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Loginner\\FakatRepo\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "does-it-matter",
+            "email": "zdravko_abramovic@protonmail.com"
+        }
+    ],
+    "require": {}
+}
