@@ -1,17 +1,22 @@
 {
-    "name": "loginner/fakat-repo",
-    "description": "Course project",
-    "type": "project",
-    "autoload": {
-        "psr-4": {
-            "Loginner\\FakatRepo\\": "src/"
-        }
-    },
-    "authors": [
-        {
-            "name": "does-it-matter",
-            "email": "zdravko_abramovic@protonmail.com"
-        }
-    ],
-    "require": {}
+  "name": "loginner/fakat-repo",
+  "description": "Course project",
+  "type": "project",
+  "autoload": {
+    "psr-4": {
+      "Loginner\\FakatRepo\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "does-it-matter",
+      "email": "zdravko_abramovic@protonmail.com"
+    }
+  ],
+  "require": {
+    "friendsofphp/php-cs-fixer" : ">=v2.19.3"
+  },
+  "scripts": {
+    "php-cs-fixer": "php-cs-fixer --rules=@PSR1"
+  }
 }
