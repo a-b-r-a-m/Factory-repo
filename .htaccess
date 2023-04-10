@@ -1,4 +1,10 @@
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^.*$ Fakat-repo/index.php [L,QSA]
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # comments MUST go on new line
+    # not file nor dir, so phys files/dirs(assets) dont get processed by index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    RewriteRule ^.*$ /index.php [L,QSA] # leading slash!
+</IfModule>

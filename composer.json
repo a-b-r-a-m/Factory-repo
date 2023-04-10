@@ -17,6 +17,6 @@
     "friendsofphp/php-cs-fixer" : ">=v2.19.3"
   },
   "scripts": {
-    "php-cs-fixer": "php-cs-fixer --rules=@PSR1"
+    "php-cs-fixer": "php-cs-fixer --rules=@PSR12"
   }
 }
