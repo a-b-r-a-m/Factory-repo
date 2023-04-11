@@ -8,19 +8,34 @@ class Router
 {
     private array $routes;
 
-    public function addRoute(string $url, callable|array $action): self // string $method // : Route //static
+    public function addRoute(string $method, string $url, callable|array $action): self // : Route //static
     {
-        $this->routes[$url] = $action;
+        $this->routes[$method][$url] = $action;
 
         return $this;
-//        return 'Route created';
-//        return new Route($url, $method, $callback);
+        //        return 'Route created';
+        //        return new Route($url, $method, $callback);
     }
 
-    public function resolveRoute(string $url) //: Response //static //string $method
+    public function get(string $url, callable|array $action): self
+    {
+        return $this->addRoute('get', $url, $action);
+    }
+
+    public function post(string $url, callable|array $action): self
+    {
+        return $this->addRoute('post', $url, $action);
+    }
+
+    public function getRoutes(): array
+    {
+        return $this->routes;
+    }
+
+    public function resolveRoute(string $url, string $method) //: Response //static //string $method
     {
         $route = explode('?', $url)[0];
-        $action = $this->routes[$route] ?? null;
+        $action = $this->routes[$method][$route] ?? null;
 
         if (!$action) {
             throw new RouteNotFoundException();
@@ -36,14 +51,14 @@ class Router
                 $class = new $class();
 
                 if (method_exists($class, $method)) {
-                    var_dump('Method exists True',  $class, $method);
+                    var_dump('Route-Method combo exists True', $class, $method);
                     return call_user_func_array([$class, $method], []);
                 }
             }
         }
 
         throw new RouteNotFoundException();
-//        return 'Route resolved, here\'s a Response';
-//        return new Response();
+        //        return 'Route resolved, here\'s a Response';
+        //        return new Response();
     }
 }
