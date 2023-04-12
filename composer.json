@@ -5,7 +5,8 @@
   "autoload": {
     "psr-4": {
       "Loginner\\FakatRepo\\": "src/"
-    }
+    },
+    "files": ["src/routes.php"]
   },
   "authors": [
     {

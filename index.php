@@ -6,7 +6,7 @@ namespace Loginner\FakatRepo;
 
 require_once realpath("vendor/autoload.php"); //require __DIR__ . '/vendor/autoload.php';
 
-routes::startRouter(); //y no proc?, "undefined"
+startRouter();
 
 echo '<pre>';
 print_r(get_defined_vars()); //$GLOBALS;

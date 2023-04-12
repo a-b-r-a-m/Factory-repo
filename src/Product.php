@@ -6,9 +6,10 @@ namespace Loginner\FakatRepo;
 
 class Product
 {
-    public function index(): string
+    public function index(array $args): Response
     {
-        return 'Product index()';
+        var_dump($args);
+        return new Response('Message from Product index()', 'HTTP_OK');
     }
 
     public function create(): string
@@ -20,7 +21,7 @@ class Product
     public function store(): void
     {
         $amount = $_POST['amount'];
-
+        var_dump('Amount stored: ');
         var_dump($amount);
     }
 }

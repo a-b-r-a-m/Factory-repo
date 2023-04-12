@@ -19,12 +19,12 @@ class Router
 
     public function get(string $url, callable|array $action): self
     {
-        return $this->addRoute('get', $url, $action);
+        return $this->addRoute('GET', $url, $action);
     }
 
     public function post(string $url, callable|array $action): self
     {
-        return $this->addRoute('post', $url, $action);
+        return $this->addRoute('POST', $url, $action);
     }
 
     public function getRoutes(): array
@@ -32,10 +32,16 @@ class Router
         return $this->routes;
     }
 
-    public function resolveRoute(string $url, string $method) //: Response //static //string $method
+    public function resolveRoute(Request $request): Response //: Response //static //string $method
     {
-        $route = explode('?', $url)[0];
+        $route = $request->getRoute();
+        $method = $request->getMethod();
+        $parameters = $request->getParameters(); // u response?
+
         $action = $this->routes[$method][$route] ?? null;
+        var_dump($method);
+        var_dump($route);
+        var_dump($action);
 
         if (!$action) {
             throw new RouteNotFoundException();
@@ -52,7 +58,7 @@ class Router
 
                 if (method_exists($class, $method)) {
                     var_dump('Route-Method combo exists True', $class, $method);
-                    return call_user_func_array([$class, $method], []);
+                    return call_user_func_array([$class, $method], [$parameters]);
                 }
             }
         }
@@ -61,4 +67,33 @@ class Router
         //        return 'Route resolved, here\'s a Response';
         //        return new Response();
     }
+//    public function resolveRoute(string $url, string $method) //: Response //static //string $method
+//    {
+//        $route = explode('?', $url)[0];
+//        $action = $this->routes[$method][$route] ?? null;
+//
+//        if (!$action) {
+//            throw new RouteNotFoundException();
+//        }
+//
+//        if (is_callable($action)) {
+//            return call_user_func($action);
+//        }
+//
+//        if (is_array($action)) {
+//            [$class, $method] = $action;
+//            if (class_exists($class)) {
+//                $class = new $class();
+//
+//                if (method_exists($class, $method)) {
+//                    var_dump('Route-Method combo exists True', $class, $method);
+//                    return call_user_func_array([$class, $method], []);
+//                }
+//            }
+//        }
+//
+//        throw new RouteNotFoundException();
+//        //        return 'Route resolved, here\'s a Response';
+//        //        return new Response();
+//    }
 }

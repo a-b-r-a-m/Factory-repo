@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace Loginner\FakatRepo;
 
 class Response implements ResponseInterface
@@ -10,7 +12,7 @@ class Response implements ResponseInterface
 
     public function send(): string
     {
-        echo 'Response';
-        return 'Response';
+        echo $this->message;
+        return $this->status;
     }
 }
