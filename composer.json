@@ -1,10 +1,10 @@
 {
-  "name": "loginner/fakat-repo",
+  "name": "loginner/phpffs",
   "description": "Course project",
   "type": "project",
   "autoload": {
     "psr-4": {
-      "Loginner\\FakatRepo\\": "src/"
+      "Loginner\\FactorySpace\\": "src/"
     },
     "files": ["src/routes.php"]
   },

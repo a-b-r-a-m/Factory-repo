@@ -1,6 +1,8 @@
 <?php
 
-namespace Loginner\FakatRepo;
+declare(strict_types=1);
+
+namespace Loginner\FactorySpace;
 
 class RouteNotFoundException extends \Exception
 {

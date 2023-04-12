@@ -1,6 +1,6 @@
 <?php
 declare(strict_types = 1);
-namespace Loginner\FakatRepo;
+namespace Loginner\FactorySpace;
 
 interface ResponseInterface
 {
