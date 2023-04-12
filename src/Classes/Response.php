@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Loginner\FactorySpace;
+namespace Loginner\FactorySpace\Classes;
+
+use Loginner\FactorySpace\Interfaces\ResponseInterface;
 
 class Response implements ResponseInterface
 {
@@ -12,7 +14,11 @@ class Response implements ResponseInterface
 
     public function send(): string
     {
-        echo $this->message;
+        return $this->message;
+    }
+
+    public function getStatus(): string
+    {
         return $this->status;
     }
 }

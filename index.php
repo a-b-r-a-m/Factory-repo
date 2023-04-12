@@ -5,10 +5,7 @@ declare(strict_types=1);
 namespace Loginner\FactorySpace;
 
 require_once realpath("vendor/autoload.php");
-
-echo __FILE__ . '<br>';
-
-startRouter();
+//require_once realpath('src/routes.php');
 
 //echo '<pre>';
 //print_r(get_defined_vars());

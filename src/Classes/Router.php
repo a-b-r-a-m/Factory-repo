@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Loginner\FactorySpace;
+namespace Loginner\FactorySpace\Classes;
+
+use Loginner\FactorySpace\Exceptions\RouteNotFoundException;
 
 class Router
 {
@@ -30,17 +32,18 @@ class Router
         return $this->routes;
     }
 
+    /**
+     * @throws RouteNotFoundException
+     */
     public function resolveRoute(Request $request): Response
     {
         echo __METHOD__ . '<br>';
 
         $route = $request->getRoute();
         $method = $request->getMethod();
-        $parameters = $request->getParameters(); // u response?
+        $parameters = $request->getParameters();
 
         $action = $this->routes[$method][$route] ?? null;
-
-        var_dump($action);
 
         if (!$action) {
             throw new RouteNotFoundException();
@@ -56,14 +59,10 @@ class Router
                 $class = new $class();
 
                 if (method_exists($class, $method)) {
-                    var_dump('Route-Method combo exists True', $class, $method);
                     return call_user_func_array([$class, $method], [$parameters]);
                 }
             }
         }
-
         throw new RouteNotFoundException();
-        //        return 'Route resolved, here\'s a Response';
-        //        return new Response();
     }
 }

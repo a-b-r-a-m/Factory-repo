@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Fakat-repo.iml" filepath="$PROJECT_DIR$/.idea/Fakat-repo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/PHPFrameworkFromScratch.iml" filepath="$PROJECT_DIR$/.idea/PHPFrameworkFromScratch.iml" />
     </modules>
   </component>
 </project>

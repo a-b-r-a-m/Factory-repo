@@ -4,28 +4,33 @@ declare(strict_types=1);
 
 namespace Loginner\FactorySpace;
 
-function startRouter(): void
-{
-    echo __FILE__ . '<br>';
-    echo __FUNCTION__ . '<br>';
+use Loginner\FactorySpace\Classes\Home;
+use Loginner\FactorySpace\Classes\Product;
+use Loginner\FactorySpace\Classes\Request;
+use Loginner\FactorySpace\Classes\Router;
+use Loginner\FactorySpace\Exceptions\RouteNotFoundException;
 
-    $router = new Router();
+echo __FILE__ . '<br>';
+echo __FUNCTION__ . '<br>';
 
-    $router
-        ->get('/', [Home::class, 'index'])
-        ->get('/products', [Product::class, 'index'])
-        ->get('/products/create', [Product::class, 'create'])
-        ->post('/products/create', [Product::class, 'store']);
+$router = new Router();
 
-    $request = new Request();
-    echo '<pre>';
-    //    var_dump($request);
-    var_dump($router->getRoutes());
-    echo '</pre>';
+$router
+    ->get('/', [Home::class, 'index'])
+    ->get('/products', [Product::class, 'index'])
+    ->get('/products/create', [Product::class, 'create'])
+    ->post('/products/create', [Product::class, 'store']);
 
-    try {
-        $router->resolveRoute($request);
-    } catch (RouteNotFoundException $e) {
-        echo $e->getMessage();
-    }
+echo '<pre>';
+var_dump($router->getRoutes());
+echo '</pre>';
+
+$request = new Request();
+try {
+    $response = $router->resolveRoute($request);
+    echo '<br>' . $response->send() . '<br>';
+    echo $response->getStatus();
+} catch (RouteNotFoundException $e) {
+    echo $e->getMessage();
 }
+

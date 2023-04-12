@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Loginner\FactorySpace;
+namespace Loginner\FactorySpace\Classes;
+
+use Loginner\FactorySpace\Interfaces\RequestInterface;
 
 class Request implements RequestInterface
 {
@@ -15,18 +17,10 @@ class Request implements RequestInterface
         $this->method = $_SERVER['REQUEST_METHOD'];
         $this->route = explode('?', $_SERVER['REQUEST_URI'])[0];
 
-        if ($this->method === 'GET') {
-            $this->parameters = $_GET;
-        } elseif ($this->method === 'POST') {
-            $this->parameters = $_POST;
-        }
-        //       $this->parameters[] = "$_{$this->method}";
+        $this->parameters['GET'] = $_GET;
+        $this->parameters['POST'] = $_POST;
 
-        //        $keyVals = explode('&', $_SERVER['QUERY_STRING']);
-        //        foreach ($keyVals as $parameter) {
-        //            $keyVals = explode('=', $parameter);
-        //            $this->parameters[$keyVals[0]] = $keyVals[1];
-        //        }
+//        echo '<pre>'; var_dump($this); echo '<pre>';
     }
 
     public function getMethod(): string
