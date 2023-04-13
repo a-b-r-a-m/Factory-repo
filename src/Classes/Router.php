@@ -8,34 +8,34 @@ use Loginner\FactorySpace\Exceptions\RouteNotFoundException;
 
 class Router
 {
-    private array $routes;
+    private static array $routes;
 
-    public function addRoute(string $method, string $url, callable|array $action): self // : Route //static
+    public static function addRoute(string $method, string $url, callable|array $action): static
     {
-        $this->routes[$method][$url] = $action;
+        static::$routes[$method][$url] = $action;
 
-        return $this; //new static()
+        return new static();
     }
 
-    public function get(string $url, callable|array $action): self
+    public static function get(string $url, callable|array $action): static
     {
-        return $this->addRoute('GET', $url, $action); //self::
+        return static::addRoute('GET', $url, $action); //self::
     }
 
-    public function post(string $url, callable|array $action): self
+    public static function post(string $url, callable|array $action): static
     {
-        return $this->addRoute('POST', $url, $action);
+        return static::addRoute('POST', $url, $action);
     }
 
-    public function getRoutes(): array
+    public static function getRoutes(): array
     {
-        return $this->routes;
+        return static::$routes;
     }
 
     /**
      * @throws RouteNotFoundException
      */
-    public function resolveRoute(Request $request): Response
+    public static function resolveRoute(Request $request): Response
     {
         echo __METHOD__ . '<br>';
 
@@ -43,7 +43,7 @@ class Router
         $method = $request->getMethod();
         $parameters = $request->getParameters();
 
-        $action = $this->routes[$method][$route] ?? null;
+        $action = static::$routes[$method][$route] ?? null;
 
         if (!$action) {
             throw new RouteNotFoundException();
